@@ -1,0 +1,12 @@
+{
+    "firstItem" : "Nueva pestaña",
+    "secondItem": "Nueva ventana",
+    "thirdItem" : "Nueva ventana de incógnito",
+    "fourthItem": [
+        {
+            "firstItem" : "Información de Google Chrome",
+            "secondItem": "Centro de ayuda",
+            "thirdItem" : "Notificar un error..."
+        }
+    ]
+}
