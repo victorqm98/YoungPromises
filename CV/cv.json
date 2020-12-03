@@ -1,0 +1,29 @@
+{
+    "name": "Diego Rodríguez Molina",
+    "address": "Avinguda Jaume 1",
+    "birthdate": "19/02/1998",
+    "studies": [
+        {
+            "name": "Web applications development",
+            "duration": "2017-2019",
+            "center": "Centre d'estudis Ploitecnics",
+        },
+        {
+            "name": "E.S.O",
+            "duration": "2010-2015",
+            "center": "Institut Cubelles"
+        }
+    ],
+    "workExperience": [
+        {
+            "company": "FactoriaZeta",
+            "duration": "8 months",
+            "jobTitle": "Junior developer"
+        },
+        {
+            "company": "Omatech",
+            "duration": "present",
+            "jobTitle": "Junior developer"
+        }
+    ]
+}
