@@ -1,0 +1,43 @@
+{
+  "name": "victor",
+  "surnames": "quiros mayer",
+  "picture": "image.jpg",
+  "website": "victorquiros.omatech.com",
+  "location": {
+    "address": "",
+    "postal_code": "08110",
+    "city": ""
+  },
+  "works": [
+    {
+      "name": "Omatech",
+      "": ""
+    },
+    {},
+    {}
+  ],
+  "studies": [
+    {
+      "name": "daw",
+      "": ""
+    },
+    {}
+  ],
+  "social": [
+    {
+      "network": "linkedin",
+      "user": "victor",
+      "url": ""
+    },
+    {
+      "network": "",
+      "user": "",
+      "url": ""
+    },
+    {
+      "network": "",
+      "user": "",
+      "url": ""
+    }
+  ]
+}

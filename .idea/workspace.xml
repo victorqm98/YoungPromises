@@ -28,6 +28,9 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Omatech\Documents\Projectes\YoungPromises\AppMenu" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Omatech\Documents\Projectes\YoungPromises\AppMenu" />
       <recent name="C:\Users\Omatech\Documents\Projectes\YoungPromises\Contacts" />
@@ -43,7 +46,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607009844823</updated>
-      <workItem from="1607009845961" duration="1331000" />
+      <workItem from="1607009845961" duration="1832000" />
     </task>
     <servers />
   </component>
