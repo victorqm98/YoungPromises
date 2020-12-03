@@ -1,0 +1,23 @@
+{
+  "name": "Sònia",
+  "last_names": "Arroyo Esparza",
+  "age": 23,
+  "skills": [
+    "Laravel",
+    "React"
+  ],
+  "jobs": [
+    {
+      "start_date": "01-01-2017",
+      "end_date": "01-01-2018",
+      "company": "SAFA",
+      "description": "ballet"
+    },
+    {
+      "start_date": "01-01-2018",
+      "end_date": "01-01-2020",
+      "company": "Omatech",
+      "description": "web developer"
+    }
+  ]
+}

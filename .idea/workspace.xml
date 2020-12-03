@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b9098a3-2a0d-4e96-9298-6a30d95f0cd4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/YoungPromises.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AppMenu/V1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CV/V1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Contacts/V1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Timetable/V1.xml" afterDir="false" />
-    </list>
+    <list default="true" id="7b9098a3-2a0d-4e96-9298-6a30d95f0cd4" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,7 +43,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607009844823</updated>
-      <workItem from="1607009845961" duration="754000" />
+      <workItem from="1607009845961" duration="1331000" />
     </task>
     <servers />
   </component>
