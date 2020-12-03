@@ -1,0 +1,15 @@
+#menu archivo VSC
+
+- Id : 1
+  Label : Nuevo archivo
+- Id : 2
+  Label : Nueva ventana 
+- Id : 3
+  Label : Abrir archivo 
+- Id : 4
+  Label : Abrir carpeta
+- Id : 6
+  Label : Abrir reciente 
+    - name : xxx
+    - name : yyy
+    - name : zzz
