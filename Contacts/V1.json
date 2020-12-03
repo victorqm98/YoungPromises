@@ -1,0 +1,38 @@
+{
+  "contact_book": [
+    {
+      "id": 1,
+      "name": "Marta Carbonell",
+      "phone": 600656565,
+      "email": "marta@gmail.com",
+      "job": {
+        "place": "St Jaume",
+        "description": "teacher"
+      },
+      "substitutes": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Joan López",
+      "phone": 605656565,
+      "email": "joan@gmail.com",
+      "substitutes": []
+    },
+    {
+      "id": 3,
+      "name": "Sergi Pérez",
+      "phone": 603657265,
+      "email": "sergi@gmail.com",
+      "jobs": {
+        "place": "Omatech",
+        "description": "Web Developer"
+      },
+      "substitutes": [
+        1
+      ]
+    }
+  ]
+}

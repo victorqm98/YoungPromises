@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<WeeklySchedule>
+    <day day="monday">
+        <hour start="8:00" end="9:00">
+            <subject name="programming">
+                <teacher>
+                    <name>Luis</name>
+                    <surname>Fernández</surname>
+                </teacher>
+                <class>A2</class>
+            </subject>
+        </hour>
+        <hour start="9:00" end="9:30">
+            <break>
+                <teacher>
+                    <name>Olga</name>
+                    <surname>Morales</surname>
+                </teacher>
+            </break>
+        </hour>
+    </day>
+</WeeklySchedule>

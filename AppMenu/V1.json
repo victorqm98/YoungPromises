@@ -1,0 +1,20 @@
+{
+  "chrome_menu": [
+    {
+      "label": "Nueva Pestaña",
+      "shortcut": "Ctrl + T"
+    },
+    {
+      "label": "Ayuda",
+      "children": [
+        {
+          "label": "Información de Google Chrome"
+        },
+        {
+          "label": "Notificar un error",
+          "shortcut": "Alt + Mayús + I"
+        }
+      ]
+    }
+  ]
+}
