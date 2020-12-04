@@ -2,7 +2,7 @@
   "name": "victor",
   "surnames": "quiros mayer",
   "picture": "image.jpg",
-  "website": "victorquiros.omatech.com",
+  "website": "",
   "location": {
     "address": "",
     "postal_code": "08110",
@@ -11,7 +11,7 @@
   "works": [
     {
       "name": "Omatech",
-      "": ""
+      "aaa": "aaa"
     },
     {},
     {}
@@ -19,7 +19,7 @@
   "studies": [
     {
       "name": "daw",
-      "": ""
+      "aaa": "aaa"
     },
     {}
   ],
