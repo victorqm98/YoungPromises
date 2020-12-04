@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cv>
+  <datos_personales>
+    <nombre><![CDATA[Agusti]]></nombre>
+    <apellidos><![CDATA[Pons Zapater]]></apellidos>
+    <fecha_nacimiento>09/04/1973</fecha_nacimiento>
+  </datos_personales>
+  <formacion>
+    <escuela inicio="1977" final="1987"><![CDATA[Grevol]]></escuela>
+    <instituto inicio="1987" final="1991"><![CDATA[ITP Hostafrancs]]></instituto>
+    <universidad inicio="1991" final="1996"><![CDATA[Facultad de Informática de Barcelona]]></universidad>
+  </formacion>
+  <experiencia_profesional>
+    <empresa inicio="1994" final="2000">Oracle Consulting</empresa>
+    <empresa inicio="2000" final="2006">La Vanguardia</empresa>
+    <empresa inicio="2007">Omatech</empresa>
+  </experiencia_profesional>
+  <hobbies>
+    <hobby>Patinaje en línea</hobby>
+    <hobby>Cómics</hobby>
+  </hobbies>
+</cv>
