@@ -2,14 +2,18 @@
 
 - Id : 1
   Label : Nuevo archivo
+  Shortcut: Ctrl + N
 - Id : 2
   Label : Nueva ventana 
+  Shortcut: Ctrl + MAYUS + N
 - Id : 3
   Label : Abrir archivo 
+  Shortcut: Ctrl + O
 - Id : 4
   Label : Abrir carpeta
+  Shortcut: Ctrl + K + Ctrl + O
 - Id : 6
   Label : Abrir reciente 
-    - name : xxx
-    - name : yyy
-    - name : zzz
+    - Ivi
+    - Mutua
+    - Reckitt
