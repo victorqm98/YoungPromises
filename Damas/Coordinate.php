@@ -23,12 +23,12 @@ class Coordinate
 
     public function sameRow(Coordinate $coordinate): bool
     {
-        return $this->row == $coordinate->getRow();
+        return $this->getRow() == $coordinate->getRow();
     }
 
     public function sameColumn(Coordinate $coordinate): bool
     {
-        return $this->column == $coordinate->getColumn();
+        return $this->getColumn() == $coordinate->getColumn();
     }
 
     public function equals(Coordinate $coordinate): bool
@@ -38,30 +38,48 @@ class Coordinate
 
     public function inDiagonal(Coordinate $coordinate): bool
     {
-        $coord_row = $coordinate->getRow();
-        $coord_column = $coordinate->getColumn();
-
-        return
-            $this->row + 1 == $coord_row && $this->column + 1 == $coord_column ||
-            $this->row - 1 == $coord_row && $this->column + 1 == $coord_column ||
-            $this->row + 1 == $coord_row && $this->column - 1 == $coord_column ||
-            $this->row - 1 == $coord_row && $this->column - 1 == $coord_column;
+        return abs($coordinate->getRow() - $this->getRow()) == abs($coordinate->getColumn() - $this->getColumn());
     }
 
     public function nextTo(Coordinate $coordinate): bool
     {
         return
-            abs($this->row - $coordinate->getRow()) == 1 ||
-            abs($this->column - $coordinate->getColumn()) == 1;
+            abs($this->getRow() - $coordinate->getRow()) == 1 ||
+            abs($this->getColumn() - $coordinate->getColumn()) == 1;
     }
 
     public function isOver(Coordinate $coordinate): bool
     {
-        return $this->row < $coordinate->getRow();
+        return $this->getRow() < $coordinate->getRow();
     }
 
     public function isUnder(Coordinate $coordinate): bool
     {
         return !$this->sameRow($coordinate) && !$this->isOver($coordinate);
+    }
+
+    private function isLeft(Coordinate $coordinate): bool
+    {
+        return $this->getColumn() < $coordinate->getColumn();
+    }
+
+    public function coordinateBetween(Coordinate $target): Coordinate
+    {   
+        $row = $this->getRow();
+        $column = $this->getColumn();
+
+        if ($this->isUnder($target)) {
+            $row -= 1;
+        } else {
+            $row += 1;
+        }
+
+        if ($this->isLeft($target)) {
+            $column += 1;
+        } else {
+            $column -= 1;
+        }
+
+        return new Coordinate($row, $column);
     }
 }

@@ -2,9 +2,16 @@
 
 class Player
 {
-    function __construct()
+    private string $color;
+
+    public function __construct(string $color)
     {
-        //
+        $this->color = $color;
+    }
+
+    public function getColor(): string
+    {
+        return $this->color;
     }
 
     public function move(Board $board, Turn $turn): void
@@ -14,7 +21,10 @@ class Player
             $target = $this->askTarget($board);
         } while (!$board->isLegalMove($origin, $target, $turn));
 
-        //si esta matando entonces vaciamos la casilla del enemigo
+        if ($board->canKill($origin, $target, $turn)) {
+            $board->empty($origin->coordinateBetween($target));
+        }
+
         $token = $board->empty($origin);
         $board->fill($target, $token);
     }

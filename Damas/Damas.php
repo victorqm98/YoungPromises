@@ -12,7 +12,7 @@ class Damas
 
     function __construct()
     {
-        $this->players  = [new Player(), new Player()];
+        $this->players  = [new Player("O"), new Player("X")];
         $this->board    = new Board();
         $this->turn     = new Turn(0);
     }
@@ -22,14 +22,16 @@ class Damas
         $this->board->show();
 
         do {
-            $current_turn = $this->turn->current();
-            echo "Turno del Jugador " . $current_turn . "\n";
 
-            $this->players[$current_turn]->move($this->board, $this->turn);
+            $current_player = $this->players[$this->turn->current()];
+            echo "Turno del Jugador " . $current_player->getColor() . "\n";
+            $current_player->move($this->board, $this->turn);
             $this->board->show();
-
             $this->turn->change();
+
         } while (!$this->board->isGameFinished());
+
+        echo "\n¡Jugador " . $this->players[$this->turn->notCurrent()] . ' gana!';
     }
 }
 

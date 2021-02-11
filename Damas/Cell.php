@@ -90,5 +90,4 @@ class Cell
 
         return $this->coordinate->isOver($target_cell->getCoordinate());
     }
-
 }
