@@ -6,7 +6,7 @@ include "Turn.php";
 
 class Damas
 {
-    private array $players; //TODO
+    private array $players;
     private Board $board;
     private Turn $turn;
 
@@ -36,5 +36,3 @@ class Damas
 }
 
 (new Damas())->play();
-
-//CESC::Aunque algunos se rian, es más facil reir que hacer!!!
