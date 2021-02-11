@@ -68,7 +68,7 @@ class Cell
         return !$this->hasToken();
     }
 
-    private function inDiagonal(Cell $target_cell): bool
+    public function inDiagonal(Cell $target_cell): bool
     {
         return $this->coordinate->inDiagonal($target_cell->getCoordinate());
     }
@@ -82,7 +82,7 @@ class Cell
         return $row != 3 && $row != 4 && ($row + $column) % 2 == 0;
     }
 
-    private function rightDirection(Cell $target_cell): bool
+    public function rightDirection(Cell $target_cell): bool
     {
         if ($this->token->isBlack()) {
             return $this->coordinate->isUnder($target_cell->getCoordinate());
@@ -91,12 +91,4 @@ class Cell
         return $this->coordinate->isOver($target_cell->getCoordinate());
     }
 
-    public function correctMove(Cell $cell): bool
-    {
-        if ($this->token->isQueen()) {
-            return $this->inDiagonal($cell);
-        }
-
-        return $this->inDiagonal($cell) && $this->rightDirection($cell);
-    }
 }

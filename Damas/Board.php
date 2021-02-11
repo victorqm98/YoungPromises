@@ -101,21 +101,72 @@ class Board
         }
     }
 
-    public function isLegalMove(Coordinate $origin, Coordinate $target): bool
+    public function isLegalMove(Coordinate $origin, Coordinate $target, Turn $turn): bool
     {
         $origin_cell = $this->find($origin);
         $target_cell = $this->find($target);
 
-        return $origin_cell->correctMove($target_cell);
+        if($origin->nextTo($target)){
+
+            if ($origin_cell->getToken()->isQueen()) {
+                return $origin_cell->inDiagonal($target_cell);
+            }
+    
+            return $origin_cell->inDiagonal($target_cell) && $origin_cell->rightDirection($target_cell);
+        }
+
+        if ($origin_cell->getToken()->isQueen()) {
+            return $this->canKill($origin, $target);
+        }
+        return $this->canKill($origin, $target, $turn) && $origin_cell->rightDirection($target_cell);
+       
+    } 
+
+    public function canKill(Coordinate $origin, Coordinate $target, Turn $turn): bool
+    {
+        $origin_cell = $this->find($origin);
+        $target_cell = $this->find($target);
+
+
+        if($origin_cell->inDiagonal($target_cell)){
+            if(abs($target_cell->getCoordinate()->getRow() - $origin_cell->getCoordinate()->getRow()) == 2){
+                $enemyCoordinate = $this->whatCoordinateIsInTheMiddle($origin, $target);
+                if($this->find($enemyCoordinate)->hasColor(!$turn->notCurrent())){
+                    return true;
+                }
+            }
+            
+        }
+        return false;
     }
 
-    private function contains(Coordinate $coordinate)
+    private function whatCoordinateIsInTheMiddle(Coordinate $origin, Coordinate $target): Coordinate
     {
-        
+
+    }
+    
+    public function isLegalOrigin(Coordinate $origin, Turn $turn): bool
+    {
+        if($this->contains($origin)){
+            $cell = $this->find($origin);
+            return $cell->hasToken() && $cell->hasColor($turn->current());
+        }
+        return false;
     }
 
-    public function correct(Coordinate $coordinate, Turn $turn): bool
-    {
-        return $this->contains($coordinate) && //no es pieza del otro
+    public function isLegalTarget(Coordinate $target): bool
+    { 
+        if($this->contains($target)){
+            return $this->find($target)->isEmpty();
+        }
+        return false;
     }
+
+    private function contains(Coordinate $coordinate): bool
+    {
+        $column = $coordinate->getColumn();
+        $row    = $coordinate->getRow();
+        return $column < static::$DIMENSION && $column >= 0 && $row < static::$DIMENSION && $row >= 0;
+    }
+
 }

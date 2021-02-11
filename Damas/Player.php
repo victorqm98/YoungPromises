@@ -10,20 +10,20 @@ class Player
     public function move(Board $board, Turn $turn): void
     {
         do {
-            $origin = $this->askOrigin();
+            $origin = $this->askOrigin($board, $turn);
             $target = $this->askTarget($board);
+        } while (!$board->isLegalMove($origin, $target, $turn));
 
-            $token = $board->empty($origin);
-            $board->fill($target, $token);
-        } while (!$board->isLegalMove($origin, $target));
+        //si esta matando entonces vaciamos la casilla del enemigo
+        $token = $board->empty($origin);
+        $board->fill($target, $token);
     }
 
-    private function askOrigin(): Coordinate
+    private function askOrigin(Board $board, Turn $turn): Coordinate
     {
         do {
             $origin = $this->askCoordinate("¿Fila origen?", "¿Columna origen?");
-        } while (!$board->find($origin)->);
-        //la casilla tiene una ficha del jugador
+        } while (!$board->isLegalOrigin($origin, $turn));
 
         return $origin;
     }
@@ -32,7 +32,7 @@ class Player
     {
         do {
             $target = $this->askCoordinate("¿Fila destino?", "¿Columna destino?");
-        } while (!$board->find($target)->isEmpty());
+        } while (!$board->isLegalTarget($target));
 
         return $target;
     }

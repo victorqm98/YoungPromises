@@ -25,7 +25,7 @@ class Damas
             $current_turn = $this->turn->current();
             echo "Turno del Jugador " . $current_turn . "\n";
 
-            $this->players[$current_turn]->move($this->board);
+            $this->players[$current_turn]->move($this->board, $this->turn);
             $this->board->show();
 
             $this->turn->change();
@@ -34,3 +34,5 @@ class Damas
 }
 
 (new Damas())->play();
+
+//CESC::Aunque algunos se rian, es más facil reir que hacer!!!
