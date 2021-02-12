@@ -34,6 +34,11 @@ class Token
         return $this->is_queen;
     }
 
+    public function transform(): void
+    {
+        $this->is_queen = true;
+    }
+
     public function sameColor(int $color): bool
     {
         return $this->getColor() == $color;
@@ -41,10 +46,26 @@ class Token
 
     public function show(): void
     {
-        if ($this->isBlack()) {
-            echo static::$BLACK;
+        $icon = $this->getIcon();
+
+        if ($this->isQueen()) {
+            echo $this->showQueen($icon);
         } else {
-            echo static::$WHITE;
+            echo $icon;
         }
+    }
+
+    private function getIcon(): string
+    {
+        if ($this->isBlack()) {
+            return static::$BLACK;
+        }
+        
+        return static::$WHITE;        
+    }
+
+    private function showQueen(string $icon): string
+    {
+        return "\033[33m" . $icon . "\033[0m";
     }
 }

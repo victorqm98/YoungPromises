@@ -27,6 +27,10 @@ class Player
 
         $token = $board->empty($origin);
         $board->fill($target, $token);
+
+        if ($board->canTransform($token, $target)) {
+            $token->transform();
+        }
     }
 
     private function askOrigin(Board $board, Turn $turn): Coordinate

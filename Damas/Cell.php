@@ -60,7 +60,7 @@ class Cell
 
     public function hasColor(int $color): int
     {
-        return $this->getToken()->sameColor($color);
+        return $this->hasToken() && $this->getToken()->sameColor($color);
     }
 
     public function isEmpty(): bool

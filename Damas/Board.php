@@ -124,12 +124,9 @@ class Board
 
     public function canKill(Coordinate $origin, Coordinate $target, Turn $turn): bool
     {
-        $origin_cell = $this->find($origin);
-        $target_cell = $this->find($target);
-        
-        if ($origin_cell->inDiagonal($target_cell)) {
+        if ($this->find($origin)->inDiagonal($this->find($target))) {
 
-            if (abs($target_cell->getCoordinate()->getRow() - $origin_cell->getCoordinate()->getRow()) == 2) {
+            if (abs($target->getRow() - $origin->getRow()) == 2) {
                 $enemyCoordinate = $origin->coordinateBetween($target);
 
                 if ($this->find($enemyCoordinate)->hasColor($turn->notCurrent())) {
@@ -156,6 +153,7 @@ class Board
         if ($this->contains($target)) {
             return $this->find($target)->isEmpty();
         }
+
         return false;
     }
 
@@ -164,5 +162,15 @@ class Board
         $column = $coordinate->getColumn();
         $row    = $coordinate->getRow();
         return $column < static::$DIMENSION && $column >= 0 && $row < static::$DIMENSION && $row >= 0;
+    }
+
+    public function canTransform(Token $token, Coordinate $coordinate): bool
+    {
+        return !$token->isQueen() && $this->inEdgeRow($coordinate);
+    }
+
+    private function inEdgeRow(Coordinate $coordinate): bool
+    {
+        return $coordinate->getRow() == 0 || $coordinate->getRow() == static::$DIMENSION - 1;
     }
 }

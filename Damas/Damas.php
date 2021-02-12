@@ -31,7 +31,7 @@ class Damas
 
         } while (!$this->board->isGameFinished());
 
-        echo "\n¡Jugador " . $this->players[$this->turn->notCurrent()] . ' gana!';
+        echo "\n¡Jugador " . $this->players[$this->turn->notCurrent()]->getColor() . ' gana!';
     }
 }
 
