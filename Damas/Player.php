@@ -51,7 +51,7 @@ class Player
         return $target;
     }
 
-    public function letterToNumber(string $letter): int
+    private function letterToNumber(string $letter): int
     {
         return ord(strtolower($letter)) - 96;
     }
