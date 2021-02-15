@@ -21,16 +21,7 @@ class Player
             $target = $this->askTarget($board);
         } while (!$board->isLegalMove($origin, $target, $turn));
 
-        if ($board->canKill($origin, $target, $turn)) {
-            $board->empty($origin->coordinateBetween($target));
-        }
-
-        $token = $board->empty($origin);
-        $board->fill($target, $token);
-
-        if ($board->canTransform($token, $target)) {
-            $token->transform();
-        }
+        $board->move($origin, $target, $turn);
     }
 
     private function askOrigin(Board $board, Turn $turn): Coordinate
@@ -51,17 +42,17 @@ class Player
         return $target;
     }
 
-    private function letterToNumber(string $letter): int
-    {
-        return ord(strtolower($letter)) - 96;
-    }
-
     private function askCoordinate(string $row_question, string $column_question): Coordinate
     {
         $row = (int) $this->askToUser($row_question) - 1;
         $column = $this->letterToNumber($this->askToUser($column_question)) - 1;
 
         return new Coordinate($row, $column);
+    }
+
+    private function letterToNumber(string $letter): int
+    {
+        return ord(strtolower($letter)) - 96;
     }
 
     private function askToUser(string $question): string

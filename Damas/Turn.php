@@ -1,7 +1,7 @@
 <?php
 
 class Turn
-{    
+{
     private int $color;
 
     function __construct(int $color)

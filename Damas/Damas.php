@@ -22,16 +22,27 @@ class Damas
         $this->board->show();
 
         do {
-
             $current_player = $this->players[$this->turn->current()];
             echo "Turno del Jugador " . $current_player->getColor() . "\n";
             $current_player->move($this->board, $this->turn);
             $this->board->show();
             $this->turn->change();
-
         } while (!$this->board->isGameFinished());
 
         echo "\n¡Jugador " . $this->players[$this->turn->notCurrent()]->getColor() . ' gana!';
+    }
+
+    public function play2()
+    {
+        $this->board->show();
+
+        do {
+
+            $this->turn->move();
+            $this->board->show();
+        } while (!$this->board->isGameFinished());
+
+        $this->turn->writeWinner();
     }
 }
 

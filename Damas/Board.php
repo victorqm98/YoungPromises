@@ -29,6 +29,20 @@ class Board
         }
     }
 
+    public function move(Coordinate $origin, Coordinate $target, Turn $turn)
+    {
+        if ($this->canKill($origin, $target, $turn)) {
+            $this->empty($origin->coordinateBetween($target));
+        }
+
+        $token = $this->empty($origin);
+        $this->fill($target, $token);
+
+        if ($this->canTransform($token, $target)) {
+            $token->transform();
+        }
+    }
+
     public function fill(Coordinate $coordinate, Token $token): void
     {
         $this->find($coordinate)->fill($token);
@@ -37,19 +51,6 @@ class Board
     public function empty(Coordinate $coordinate): Token
     {
         return $this->find($coordinate)->empty();
-    }
-
-    private function showLetters(): void
-    {
-        echo static::$SPACE . static::$SPACE;
-        $letter = "A";
-
-        for ($i = 0; $i < static::$DIMENSION; $i++) {
-            echo $letter;
-            $letter++;
-        }
-
-        echo static::$LINE_BREAK;
     }
 
     public function show(): void
@@ -75,6 +76,19 @@ class Board
         echo static::$LINE_BREAK . static::$LINE_BREAK;
     }
 
+    private function showLetters(): void
+    {
+        echo static::$SPACE . static::$SPACE;
+        $letter = "A";
+
+        for ($i = 0; $i < static::$DIMENSION; $i++) {
+            echo $letter;
+            $letter++;
+        }
+
+        echo static::$LINE_BREAK;
+    }
+
     public function isGameFinished(): bool
     {
         $tokens = [0, 0];
@@ -94,11 +108,15 @@ class Board
 
     public function find(Coordinate $coordinate): Cell
     {
+        assert($coordinate->isValid());
+
         foreach ($this->cells as $cell) {
             if ($cell->inCoordinate($coordinate)) {
                 return $cell;
             }
         }
+
+        assert(false);
     }
 
     public function isLegalMove(Coordinate $origin, Coordinate $target, Turn $turn): bool
@@ -106,20 +124,11 @@ class Board
         $origin_cell = $this->find($origin);
         $target_cell = $this->find($target);
 
-        if ($origin->nextTo($target)) {
-
-            if ($origin_cell->getToken()->isQueen()) {
-                return $origin_cell->inDiagonal($target_cell);
-            }
-
-            return $origin_cell->inDiagonal($target_cell) && $origin_cell->rightDirection($target_cell);
+        if ($origin_cell->getToken()->isQueen() || $origin_cell->rightDirection($target_cell)) {
+            return $this->canKill($origin, $target, $turn) || $origin->nextTo($target) && $origin_cell->inDiagonal($target_cell);
         }
 
-        if ($origin_cell->getToken()->isQueen()) {
-            return $this->canKill($origin, $target, $turn);
-        }
-
-        return $this->canKill($origin, $target, $turn) && $origin_cell->rightDirection($target_cell);
+        return false;    
     }
 
     public function canKill(Coordinate $origin, Coordinate $target, Turn $turn): bool
@@ -140,7 +149,8 @@ class Board
 
     public function isLegalOrigin(Coordinate $origin, Turn $turn): bool
     {
-        if ($this->contains($origin)) {
+        if ($origin->isValid(static::$DIMENSION)) {
+        // if ($this->contains($origin)) {
             $cell = $this->find($origin);
             return $cell->hasToken() && $cell->hasColor($turn->current());
         }

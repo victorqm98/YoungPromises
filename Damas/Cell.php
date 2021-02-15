@@ -3,7 +3,7 @@
 class Cell
 {
     private Coordinate $coordinate;
-    private Token $token;
+    private ?Token $token;
     private static $EMPTY = '-';
 
     function __construct(Coordinate $coordinate)
@@ -29,8 +29,7 @@ class Cell
     public function empty(): Token
     {
         $token = $this->getToken();
-        unset($this->token);
-
+        $this->token = null;
         return $token;
     }
 
