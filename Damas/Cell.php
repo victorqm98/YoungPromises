@@ -21,7 +21,7 @@ class Cell
         return $this->token;
     }
 
-    public function fill(Token $token): void
+    public function fill(?Token $token): void
     {
         $this->token = $token;
     }
@@ -38,7 +38,7 @@ class Cell
         return $this->coordinate->equals($coordinate);
     }
 
-    public function differentRow(Cell $cell): bool
+    public function differentRow(self $cell): bool
     {
         return !$this->coordinate->sameRow($cell->getCoordinate());
     }
@@ -67,21 +67,12 @@ class Cell
         return !$this->hasToken();
     }
 
-    public function inDiagonal(Cell $target_cell): bool
+    public function inDiagonal(self $target_cell): bool
     {
         return $this->coordinate->inDiagonal($target_cell->getCoordinate());
     }
 
-    public function hasInitialToken(): bool
-    {
-        $coordinate = $this->getCoordinate();
-        $row = $coordinate->getRow();
-        $column = $coordinate->getColumn();
-
-        return $row != 3 && $row != 4 && ($row + $column) % 2 == 0;
-    }
-
-    public function rightDirection(Cell $target_cell): bool
+    public function rightDirection(self $target_cell): bool
     {
         if ($this->token->isBlack()) {
             return $this->coordinate->isUnder($target_cell->getCoordinate());

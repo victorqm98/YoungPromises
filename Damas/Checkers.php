@@ -4,7 +4,7 @@ include "Player.php";
 include "Board.php";
 include "Turn.php";
 
-class Damas
+class Checkers
 {
     private array $players;
     private Board $board;
@@ -37,7 +37,6 @@ class Damas
         $this->board->show();
 
         do {
-
             $this->turn->move();
             $this->board->show();
         } while (!$this->board->isGameFinished());
@@ -46,4 +45,4 @@ class Damas
     }
 }
 
-(new Damas())->play();
+(new Checkers())->play();

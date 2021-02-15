@@ -21,10 +21,7 @@ class Board
                 $coordinate = new Coordinate($row, $column);
                 $new_cell = new Cell($coordinate);
                 $this->cells[] = $new_cell;
-
-                if ($new_cell->hasInitialToken()) {
-                    $this->fill($coordinate, new Token($row > 4 ? 1 : 0));
-                }
+                $this->fill($coordinate, $coordinate->initialToken(static::$DIMENSION));
             }
         }
     }
@@ -43,7 +40,7 @@ class Board
         }
     }
 
-    public function fill(Coordinate $coordinate, Token $token): void
+    public function fill(Coordinate $coordinate, ?Token $token): void
     {
         $this->find($coordinate)->fill($token);
     }
@@ -108,7 +105,7 @@ class Board
 
     public function find(Coordinate $coordinate): Cell
     {
-        assert($coordinate->isValid());
+        assert($coordinate->isValid(static::$DIMENSION));
 
         foreach ($this->cells as $cell) {
             if ($cell->inCoordinate($coordinate)) {
@@ -128,20 +125,18 @@ class Board
             return $this->canKill($origin, $target, $turn) || $origin->nextTo($target) && $origin_cell->inDiagonal($target_cell);
         }
 
-        return false;    
+        return false;
     }
 
     public function canKill(Coordinate $origin, Coordinate $target, Turn $turn): bool
-    {
-        if ($this->find($origin)->inDiagonal($this->find($target))) {
+    {        
+        $origin_cell = $this->find($origin);
+        $target_cell = $this->find($target);
 
-            if (abs($target->getRow() - $origin->getRow()) == 2) {
-                $enemyCoordinate = $origin->coordinateBetween($target);
+        if ($origin_cell->inDiagonal($target_cell) && abs($target->getRow() - $origin->getRow()) == 2) {
+            $enemyCoordinate = $origin->coordinateBetween($target);
 
-                if ($this->find($enemyCoordinate)->hasColor($turn->notCurrent())) {
-                    return true;
-                }
-            }
+            return $this->find($enemyCoordinate)->hasColor($turn->notCurrent());
         }
 
         return false;
@@ -150,7 +145,6 @@ class Board
     public function isLegalOrigin(Coordinate $origin, Turn $turn): bool
     {
         if ($origin->isValid(static::$DIMENSION)) {
-        // if ($this->contains($origin)) {
             $cell = $this->find($origin);
             return $cell->hasToken() && $cell->hasColor($turn->current());
         }
@@ -160,18 +154,7 @@ class Board
 
     public function isLegalTarget(Coordinate $target): bool
     {
-        if ($this->contains($target)) {
-            return $this->find($target)->isEmpty();
-        }
-
-        return false;
-    }
-
-    private function contains(Coordinate $coordinate): bool
-    {
-        $column = $coordinate->getColumn();
-        $row    = $coordinate->getRow();
-        return $column < static::$DIMENSION && $column >= 0 && $row < static::$DIMENSION && $row >= 0;
+        return $target->isValid(static::$DIMENSION) && $this->find($target)->isEmpty();
     }
 
     public function canTransform(Token $token, Coordinate $coordinate): bool

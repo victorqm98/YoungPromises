@@ -1,85 +1,27 @@
 <?php
 
-class Coordinate
+include 'AbstractCoordinate.php';
+
+class Coordinate extends AbstractCoordinate
 {
-    private int $row;
-    private int $column;
-
-    function __construct(int $row, int $column)
+    public function isValid(int $dimension): bool
     {
-        $this->row = $row;
-        $this->column = $column;
+        $column = $this->getColumn();
+        $row = $this->getRow();
+        return $column < $dimension && $column >= 0 && $row < $dimension && $row >= 0;
     }
 
-    public function getRow(): int
+    public function initialToken(int $dimension): ?Token
     {
-        return $this->row;
-    }
-
-    public function getColumn(): int
-    {
-        return $this->column;
-    }
-
-    public function sameRow(Coordinate $coordinate): bool
-    {
-        return $this->getRow() == $coordinate->getRow();
-    }
-
-    public function sameColumn(Coordinate $coordinate): bool
-    {
-        return $this->getColumn() == $coordinate->getColumn();
-    }
-
-    public function equals(Coordinate $coordinate): bool
-    {
-        return $this->sameRow($coordinate) && $this->sameColumn($coordinate);
-    }
-
-    public function inDiagonal(Coordinate $coordinate): bool
-    {
-        return abs($coordinate->getRow() - $this->getRow()) == abs($coordinate->getColumn() - $this->getColumn());
-    }
-
-    public function nextTo(Coordinate $coordinate): bool
-    {
-        return
-            abs($this->getRow() - $coordinate->getRow()) == 1 ||
-            abs($this->getColumn() - $coordinate->getColumn()) == 1;
-    }
-
-    public function isOver(Coordinate $coordinate): bool
-    {
-        return $this->getRow() < $coordinate->getRow();
-    }
-
-    public function isUnder(Coordinate $coordinate): bool
-    {
-        return !$this->sameRow($coordinate) && !$this->isOver($coordinate);
-    }
-
-    private function isLeft(Coordinate $coordinate): bool
-    {
-        return $this->getColumn() < $coordinate->getColumn();
-    }
-
-    public function coordinateBetween(Coordinate $target): Coordinate
-    {   
         $row = $this->getRow();
         $column = $this->getColumn();
+        $middle_row = $dimension / 2;
+        $in_down_side = $row > $middle_row;
 
-        if ($this->isUnder($target)) {
-            $row -= 1;
-        } else {
-            $row += 1;
+        if (($row < $middle_row - 1 || $in_down_side) && ($row + $column) % 2 == 0) {
+            return new Token($in_down_side ? 1 : 0);
         }
 
-        if ($this->isLeft($target)) {
-            $column += 1;
-        } else {
-            $column -= 1;
-        }
-
-        return new Coordinate($row, $column);
+        return null;
     }
 }
