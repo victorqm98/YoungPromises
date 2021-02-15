@@ -11,7 +11,7 @@ class Cell
         $this->coordinate = $coordinate;
     }
 
-    public function getCoordinate(): Coordinate
+    private function getCoordinate(): Coordinate
     {
         return $this->coordinate;
     }
@@ -57,7 +57,7 @@ class Cell
         return isset($this->token);
     }
 
-    public function hasColor(int $color): int
+    public function hasColor(string $color): string
     {
         return $this->hasToken() && $this->getToken()->sameColor($color);
     }

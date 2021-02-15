@@ -24,11 +24,6 @@ class Token
         return $this->getColor() == 1;
     }
 
-    public function isWhite(): bool
-    {
-        return !$this->isBlack();
-    }
-
     public function isQueen(): bool
     {
         return $this->is_queen;
@@ -39,7 +34,7 @@ class Token
         $this->is_queen = true;
     }
 
-    public function sameColor(int $color): bool
+    public function sameColor(string $color): bool
     {
         return $this->getColor() == $color;
     }

@@ -14,21 +14,21 @@ class Player
         return $this->color;
     }
 
-    public function move(Board $board, Turn $turn): void
+    public function move(Board $board): void
     {
         do {
-            $origin = $this->askOrigin($board, $turn);
+            $origin = $this->askOrigin($board);
             $target = $this->askTarget($board);
-        } while (!$board->isLegalMove($origin, $target, $turn));
+        } while (!$board->isLegalMove($origin, $target, $this));
 
-        $board->move($origin, $target, $turn);
+        $board->move($origin, $target, $this);
     }
 
-    private function askOrigin(Board $board, Turn $turn): Coordinate
+    private function askOrigin(Board $board): Coordinate
     {
         do {
             $origin = $this->askCoordinate("¿Fila origen?", "¿Columna origen?");
-        } while (!$board->isLegalOrigin($origin, $turn));
+        } while (!$board->isLegalOrigin($origin, $this));
 
         return $origin;
     }
