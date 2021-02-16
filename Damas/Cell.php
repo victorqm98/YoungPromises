@@ -74,7 +74,7 @@ class Cell
 
     public function rightDirection(self $target_cell): bool
     {
-        if ($this->token->isBlack()) {
+        if ($this->getToken()->isBlack()) {
             return $this->coordinate->isUnder($target_cell->getCoordinate());
         }
 

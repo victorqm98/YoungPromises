@@ -146,7 +146,7 @@ class Board
     {
         if ($origin->isValid(static::$DIMENSION)) {
             $cell = $this->find($origin);
-            return $cell->hasToken() && $cell->hasColor($player->getColor());
+            return $cell->hasColor($player->getColor());
         }
 
         return false;

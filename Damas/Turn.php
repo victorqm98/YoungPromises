@@ -40,6 +40,6 @@ class Turn
 
     private function notCurrent(): int
     {
-        return ($this->current + 1) % 2;
+        return ($this->current() + 1) % 2;
     }
 }
