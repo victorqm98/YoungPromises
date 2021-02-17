@@ -40,22 +40,13 @@ class Token
 
     public function show(): void
     {
-        $icon = $this->getIcon();
+        $icon = $this->getColor();
 
         if ($this->isQueen()) {
             echo $this->showQueen($icon);
         } else {
             echo $icon;
         }
-    }
-
-    private function getIcon(): string
-    {
-        if ($this->isBlack()) {
-            return static::$BLACK;
-        }
-        
-        return static::$WHITE;        
     }
 
     private function showQueen(string $icon): string
