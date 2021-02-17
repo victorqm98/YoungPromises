@@ -28,7 +28,7 @@ class Player
     {
         do {
             $origin = $this->askCoordinate("¿Fila origen?", "¿Columna origen?");
-        } while (!$board->isLegalOrigin($origin, $this));
+        } while (!$origin->isValid(Board::getDimension()) || !$board->find($origin)->hasColor($this->getColor()));
 
         return $origin;
     }
@@ -37,7 +37,7 @@ class Player
     {
         do {
             $target = $this->askCoordinate("¿Fila destino?", "¿Columna destino?");
-        } while (!$board->isLegalTarget($target));
+        } while (!$target->isValid(Board::getDimension()) || !$board->find($target)->isEmpty());
 
         return $target;
     }

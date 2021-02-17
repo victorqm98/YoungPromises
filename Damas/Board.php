@@ -15,15 +15,21 @@ class Board
     function __construct()
     {
         $this->cells = [];
+        $dimension = static::getDimension();
 
-        for ($row = 0; $row < static::$DIMENSION; $row++) {
-            for ($column = 0; $column < static::$DIMENSION; $column++) {
+        for ($row = 0; $row < $dimension; $row++) {
+            for ($column = 0; $column < $dimension; $column++) {
                 $coordinate = new Coordinate($row, $column);
                 $new_cell = new Cell($coordinate);
                 $this->cells[] = $new_cell;
-                $this->fill($coordinate, $coordinate->initialToken(static::$DIMENSION));
+                $this->fill($coordinate, $coordinate->initialToken($dimension));
             }
         }
+    }
+
+    public static function getDimension(): int
+    {
+        return static::$DIMENSION;
     }
 
     public function move(Coordinate $origin, Coordinate $target, Player $player)
@@ -77,8 +83,9 @@ class Board
     {
         echo static::$SPACE . static::$SPACE;
         $letter = "A";
+        $dimension = static::getDimension();
 
-        for ($i = 0; $i < static::$DIMENSION; $i++) {
+        for ($i = 0; $i < $dimension; $i++) {
             echo $letter;
             $letter++;
         }
@@ -103,9 +110,9 @@ class Board
         return true;
     }
 
-    private function find(Coordinate $coordinate): Cell
+    public function find(Coordinate $coordinate): Cell
     {
-        assert($coordinate->isValid(static::$DIMENSION));
+        assert($coordinate->isValid(static::getDimension()));
 
         foreach ($this->cells as $cell) {
             if ($cell->inCoordinate($coordinate)) {
@@ -129,7 +136,7 @@ class Board
     }
 
     private function canKill(Coordinate $origin, Coordinate $target, Player $player): bool
-    {        
+    {
         $origin_cell = $this->find($origin);
         $target_cell = $this->find($target);
 
@@ -142,23 +149,8 @@ class Board
         return false;
     }
 
-    public function isLegalOrigin(Coordinate $origin, Player $player): bool
-    {
-        if ($origin->isValid(static::$DIMENSION)) {
-            $cell = $this->find($origin);
-            return $cell->hasColor($player->getColor());
-        }
-
-        return false;
-    }
-
-    public function isLegalTarget(Coordinate $target): bool
-    {
-        return $target->isValid(static::$DIMENSION) && $this->find($target)->isEmpty();
-    }
-
     private function canTransform(Token $token, Coordinate $coordinate): bool
     {
-        return !$token->isQueen() && ($coordinate->getRow() == 0 || $coordinate->getRow() == static::$DIMENSION - 1);
+        return !$token->isQueen() && ($coordinate->getRow() == 0 || $coordinate->getRow() == static::getDimension() - 1);
     }
 }
