@@ -12,18 +12,26 @@ class Board
     private static $LINE_BREAK = "\n";
     private static $SPACE = " ";
 
-    function __construct()
+    function __construct(Turn $turn)
     {
         $this->cells = [];
         $dimension = static::getDimension();
-
         for ($row = 0; $row < $dimension; $row++) {
             for ($column = 0; $column < $dimension; $column++) {
                 $coordinate = new Coordinate($row, $column);
                 $new_cell = new Cell($coordinate);
                 $this->cells[] = $new_cell;
-                $this->fill($coordinate, $coordinate->initialToken($dimension));
+                $this->putToken($dimension, $turn, $coordinate);
             }
+        }
+       
+    }
+
+    public function putToken(int $dimension, Turn $turn, Coordinate $coordinate): void
+    {
+        if($coordinate->hasInitialToken($dimension)){
+            $player = $turn->getPlayer($coordinate->getInitialPlayerIndex(static::getDimension()));
+            $this->fill($coordinate, new Token($player));
         }
     }
 
@@ -46,7 +54,7 @@ class Board
         }
     }
 
-    private function fill(Coordinate $coordinate, ?Token $token): void
+    private function fill(Coordinate $coordinate, Token $token): void
     {
         $this->find($coordinate)->fill($token);
     }

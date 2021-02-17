@@ -28,7 +28,7 @@ class Turn
         echo "\n¡Jugador " . $this->getPlayer($this->notCurrent())->getColor() . ' gana!';
     }
 
-    private function getPlayer(int $player): Player
+    public function getPlayer(int $player): Player
     {
         return $this->players[$player];
     }

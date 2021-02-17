@@ -8,20 +8,25 @@ class Coordinate extends AbstractCoordinate
     {
         $column = $this->getColumn();
         $row = $this->getRow();
+        
         return $column < $dimension && $column >= 0 && $row < $dimension && $row >= 0;
     }
 
-    public function initialToken(int $dimension): ?Token
+    public function hasInitialToken(int $dimension): bool
     {
         $row = $this->getRow();
         $column = $this->getColumn();
         $middle_row = $dimension / 2;
         $in_down_side = $row > $middle_row;
 
-        if (($row < $middle_row - 1 || $in_down_side) && ($row + $column) % 2 == 0) {
-            return new Token($in_down_side ? 1 : 0);
-        }
-
-        return null;
+        return ($row < $middle_row - 1 || $in_down_side) && ($row + $column) % 2 == 0;
     }
+
+    public function getInitialPlayerIndex(int $dimension): int
+    {
+        assert($this->hasInitialToken($dimension)); //TREMENDA APORTACIÓN DE LA GRAN MAESTRA SONIA
+
+        return $this->getRow() > $dimension / 2 ? 1 : 0;
+    }
+
 }
