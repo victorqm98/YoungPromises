@@ -24,7 +24,7 @@ class Coordinate extends AbstractCoordinate
 
     public function getInitialPlayerIndex(int $dimension): int
     {
-        assert($this->hasInitialToken($dimension)); //TREMENDA APORTACIÓN DE LA GRAN MAESTRA SONIA
+        assert($this->hasInitialToken($dimension)); 
 
         return $this->getRow() > $dimension / 2 ? 1 : 0;
     }

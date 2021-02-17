@@ -16,6 +16,11 @@ class Turn
         $this->current = $this->notCurrent();
     }
 
+    public function getPlayers()
+    {
+        return $this->players;
+    }
+
     public function move(Board $board): void
     {
         $current_player = $this->getPlayer($this->current());

@@ -24,12 +24,11 @@ class Board
                 $this->putToken($dimension, $turn, $coordinate);
             }
         }
-       
     }
 
     public function putToken(int $dimension, Turn $turn, Coordinate $coordinate): void
     {
-        if($coordinate->hasInitialToken($dimension)){
+        if ($coordinate->hasInitialToken($dimension)) {
             $player = $turn->getPlayer($coordinate->getInitialPlayerIndex(static::getDimension()));
             $this->fill($coordinate, new Token($player));
         }
@@ -101,15 +100,17 @@ class Board
         echo static::$LINE_BREAK;
     }
 
-    public function isGameFinished(): bool
+    public function isGameFinished(Turn $turn): bool
     {
-        $tokens = [0, 0];
+        foreach ($turn->getPlayers() as $player) {
+            $tokens[$player->getColor()] = 0;
+        }
 
         foreach ($this->cells as $cell) {
             if ($cell->hasToken()) {
                 $tokens[$cell->getToken()->getColor()]++;
 
-                if ($tokens[0] > 0 && $tokens[1] > 0) {
+                if ($tokens[$turn->getPlayer(0)->getColor()] > 0 && $tokens[$turn->getPlayer(1)->getColor()] > 0) {
                     return false;
                 }
             }

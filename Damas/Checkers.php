@@ -23,7 +23,7 @@ class Checkers
             $this->turn->move($this->board);
             $this->board->show();
             $this->turn->change();
-        } while (!$this->board->isGameFinished());
+        } while (!$this->board->isGameFinished($this->turn));
 
         $this->turn->writeWinner();
     }

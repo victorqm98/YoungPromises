@@ -2,26 +2,25 @@
 
 class Token
 {
-    private int $color;
     private bool $is_queen;
 
     private static $BLACK = "X";
     private static $WHITE = "O";
 
-    function __construct(int $color)
+    function __construct(Player $player)
     {
-        $this->color = $color;
+        $this->player = $player;
         $this->is_queen = false;
     }
 
-    public function getColor(): int
+    public function getColor(): string
     {
-        return $this->color;
+        return $this->player->getColor();
     }
 
     public function isBlack(): bool
     {
-        return $this->getColor() == 1;
+        return $this->getColor() == static::$BLACK;
     }
 
     public function isQueen(): bool
