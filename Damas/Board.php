@@ -100,23 +100,21 @@ class Board
         echo static::$LINE_BREAK;
     }
 
-    public function isGameFinished(Turn $turn): bool
+    public function getWinner(Turn $turn): ?Player
     {
-        foreach ($turn->getPlayers() as $player) {
-            $tokens[$player->getColor()] = 0;
-        }
+        $tokens = 0;
+        $current_player = $turn->getPlayer($turn->current());
 
         foreach ($this->cells as $cell) {
-            if ($cell->hasToken()) {
-                $tokens[$cell->getToken()->getColor()]++;
-
-                if ($tokens[$turn->getPlayer(0)->getColor()] > 0 && $tokens[$turn->getPlayer(1)->getColor()] > 0) {
-                    return false;
+            if ($cell->hasToken() && $cell->getToken()->getPlayer() == $current_player) {
+                $tokens++;
+                if ($tokens > 0) {
+                    return $current_player;
                 }
             }
         }
 
-        return true;
+        return null;
     }
 
     public function find(Coordinate $coordinate): Cell

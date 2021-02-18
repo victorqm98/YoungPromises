@@ -90,4 +90,9 @@ class Player
 
         return $line;
     }
+
+    public function claimVictory(): void
+    {
+        echo "\n¡Jugador " . $this->getColor() . ' gana!';
+    }
 }

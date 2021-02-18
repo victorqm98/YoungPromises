@@ -21,10 +21,11 @@ class Checkers
         do {
             $this->turn->move($this->board);
             $this->board->show();
+            $winner = $this->board->getWinner($this->turn);
             $this->turn->change();
-        } while (!$this->board->isGameFinished($this->turn));
+        } while (!$winner);
 
-        $this->turn->writeWinner();
+        $winner->claimVictory();
     }
 }
 

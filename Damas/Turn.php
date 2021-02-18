@@ -15,24 +15,19 @@ class Turn
 
     public function change(): void
     {
-        $this->current = $this->notCurrent();
-    }
-
-    public function getPlayers()
-    {
-        return $this->players;
+        $this->current = !$this->current;
     }
 
     public function move(Board $board): void
     {
-        $current_player = $this->getPlayer($this->current());
-        echo "Turno del Jugador " . $current_player->getColor() . "\n";
+        $current_player = $this->currentPlayer();
+        $this->claimTurn($current_player);
         $current_player->move($board);
     }
 
-    public function writeWinner(): void
-    {
-        echo "\n¡Jugador " . $this->getPlayer($this->notCurrent())->getColor() . ' gana!';
+    private function claimTurn(Player $player): void
+    {  
+        echo "Turno del Jugador " . $player->getColor() . "\n";
     }
 
     public function getPlayer(int $player): Player
@@ -40,13 +35,8 @@ class Turn
         return $this->players[$player];
     }
 
-    private function current(): int
+    public function currentPlayer(): Player
     {
-        return $this->current;
-    }
-
-    private function notCurrent(): int
-    {
-        return ($this->current() + 1) % 2;
+        return $this->getPlayer($this->current);
     }
 }
