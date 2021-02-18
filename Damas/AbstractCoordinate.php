@@ -58,14 +58,14 @@ abstract class AbstractCoordinate
         return !$this->sameRow($coordinate) && !$this->isOver($coordinate);
     }
 
-    private function isLeft(self $coordinate): bool
+    public function isLeft(self $coordinate): bool
     {
         return $this->getColumn() < $coordinate->getColumn();
     }
 
     public function getBetweenColumn(self $coordinate): int
     {
-        $column = $coordinate->getColumn();
+        $column = $this->getColumn();
 
         if ($this->isLeft($coordinate)) {
             return $column + 1;
@@ -76,7 +76,7 @@ abstract class AbstractCoordinate
 
     public function getBetweenRow(self $coordinate): int
     {
-        $row = $coordinate->getRow();
+        $row = $this->getRow();
 
         if ($this->isUnder($coordinate)) {
             return $row - 1;

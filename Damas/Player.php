@@ -32,7 +32,7 @@ class Player
         return $this->getColor() == static::getBlackColor();
     }
 
-    public function getOppositeColor(): bool
+    public function getOppositeColor(): string
     {
         return $this->isBlack() ? static::getWhiteColor() : static::getBlackColor();
     }

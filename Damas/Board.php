@@ -151,7 +151,7 @@ class Board
 
         if ($origin_cell->inDiagonal($target_cell) && abs($target->getRow() - $origin->getRow()) == 2) {
             $enemyCoordinate = $origin->coordinateBetween($target, static::getDimension());
-            return $this->find($enemyCoordinate)->hasColor($player->getOppositeColor());;
+            return $this->find($enemyCoordinate)->hasColor($player->getOppositeColor());
         }
 
         return false;
