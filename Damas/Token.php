@@ -18,7 +18,7 @@ class Token
 
     public function getColor(): string
     {
-        return $this->player->getColor();
+        return $this->getPlayer()->getColor();
     }
 
     public function isBlack(): bool

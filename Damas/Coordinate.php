@@ -29,8 +29,10 @@ class Coordinate extends AbstractCoordinate
         return $this->getRow() > $dimension / 2 ? 1 : 0;
     }
 
-    public function coordinateBetween(self $target): self
+    public function coordinateBetween(self $target, int $dimension): self
     {
+        assert($target->isValid($dimension));
+
         return new self($this->getBetweenRow($target), $this->getBetweenColumn($target));
     }
 }
