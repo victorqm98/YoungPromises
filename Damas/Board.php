@@ -106,7 +106,7 @@ class Board
         $current_player = $turn->currentPlayer();
 
         foreach ($this->cells as $cell) {
-            if ($cell->hasToken() && $cell->getToken()->getColor() == $current_player->getColor()) {
+            if ($cell->hasToken() && $cell->getToken()->sameColor($current_player->getColor())) {
                 $tokens++;
                 if ($tokens > 0) {
                     return null;
