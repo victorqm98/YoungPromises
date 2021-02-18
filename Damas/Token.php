@@ -2,15 +2,18 @@
 
 class Token
 {
+    private Player $player;
     private bool $is_queen;
-
-    private static $BLACK = "X";
-    private static $WHITE = "O";
 
     function __construct(Player $player)
     {
         $this->player = $player;
         $this->is_queen = false;
+    }
+
+    public function getPlayer(): Player
+    {
+        return $this->player;
     }
 
     public function getColor(): string
@@ -20,7 +23,7 @@ class Token
 
     public function isBlack(): bool
     {
-        return $this->getColor() == static::$BLACK;
+        return $this->getPlayer()->isBlack();
     }
 
     public function isQueen(): bool

@@ -2,7 +2,10 @@
 
 class Player
 {
-    private string $color;
+    protected static $BLACK = "X";
+    protected static $WHITE = "O";
+
+    protected string $color;
 
     public function __construct(string $color)
     {
@@ -12,6 +15,26 @@ class Player
     public function getColor(): string
     {
         return $this->color;
+    }
+
+    public static function getWhiteColor(): string
+    {
+        return static::$WHITE;
+    }
+
+    public static function getBlackColor(): string
+    {
+        return static::$BLACK;
+    }
+
+    public function isBlack(): bool
+    {
+        return $this->getColor() == static::getBlackColor();
+    }
+
+    public function getOppositeColor(): bool
+    {
+        return $this->isBlack() ? static::getWhiteColor() : static::getBlackColor();
     }
 
     public function move(Board $board): void

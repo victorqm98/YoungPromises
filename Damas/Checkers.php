@@ -1,6 +1,5 @@
 <?php
 
-include "Player.php";
 include "Board.php";
 include "Turn.php";
 

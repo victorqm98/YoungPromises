@@ -63,23 +63,25 @@ abstract class AbstractCoordinate
         return $this->getColumn() < $coordinate->getColumn();
     }
 
-    public function coordinateBetween(self $target): self
-    {   
-        $row = $this->getRow();
-        $column = $this->getColumn();
+    public function getBetweenColumn(self $coordinate): int
+    {
+        $column = $coordinate->getColumn();
 
-        if ($this->isUnder($target)) {
-            $row -= 1;
-        } else {
-            $row += 1;
+        if ($this->isLeft($coordinate)) {
+            return $column + 1;
         }
 
-        if ($this->isLeft($target)) {
-            $column += 1;
-        } else {
-            $column -= 1;
+        return $column - 1;
+    }
+
+    public function getBetweenRow(self $coordinate): int
+    {
+        $row = $coordinate->getRow();
+
+        if ($this->isUnder($coordinate)) {
+            return $row - 1;
         }
 
-        return new self($row, $column);
+        return $row + 1;
     }
 }

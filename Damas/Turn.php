@@ -1,5 +1,7 @@
 <?php
 
+include "Player.php";
+
 class Turn
 {
     private array $players;
@@ -8,7 +10,7 @@ class Turn
     function __construct()
     {
         $this->current = 0;
-        $this->players = [new Player("O"), new Player("X")];
+        $this->players = [new Player(Player::getWhiteColor()), new Player(Player::getBlackColor())];
     }
 
     public function change(): void
