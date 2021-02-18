@@ -10,8 +10,8 @@ class Checkers
 
     function __construct()
     {
-        $this->turn = new Turn();
-        $this->board = new Board($this->turn);
+        $this->turn     = new Turn();
+        $this->board    = new Board($this->turn);
     }
 
     public function play()

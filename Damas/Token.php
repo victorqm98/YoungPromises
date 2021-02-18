@@ -7,7 +7,7 @@ class Token
 
     function __construct(Player $player)
     {
-        $this->player = $player;
+        $this->player   = $player;
         $this->is_queen = false;
     }
 

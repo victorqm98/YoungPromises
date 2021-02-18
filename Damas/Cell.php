@@ -28,8 +28,8 @@ class Cell
 
     public function empty(): Token
     {
-        $token = $this->getToken();
-        $this->token = null;
+        $token          = $this->getToken();
+        $this->token    = null;
         return $token;
     }
 

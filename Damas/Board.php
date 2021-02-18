@@ -7,10 +7,10 @@ include 'Coordinate.php';
 class Board
 {
     private array $cells;
-    private static $DIMENSION = 8;
+    private static $DIMENSION   = 8;
 
-    private static $LINE_BREAK = "\n";
-    private static $SPACE = " ";
+    private static $LINE_BREAK  = "\n";
+    private static $SPACE       = " ";
 
     function __construct(Turn $turn)
     {
@@ -18,9 +18,9 @@ class Board
         $dimension = static::getDimension();
         for ($row = 0; $row < $dimension; $row++) {
             for ($column = 0; $column < $dimension; $column++) {
-                $coordinate = new Coordinate($row, $column);
-                $new_cell = new Cell($coordinate);
-                $this->cells[] = $new_cell;
+                $coordinate     = new Coordinate($row, $column);
+                $new_cell       = new Cell($coordinate);
+                $this->cells[]  = $new_cell;
                 $this->putToken($dimension, $turn, $coordinate);
             }
         }
@@ -89,8 +89,8 @@ class Board
     private function showLetters(): void
     {
         echo static::$SPACE . static::$SPACE;
-        $letter = "A";
-        $dimension = static::getDimension();
+        $letter     = "A";
+        $dimension  = static::getDimension();
 
         for ($i = 0; $i < $dimension; $i++) {
             echo $letter;

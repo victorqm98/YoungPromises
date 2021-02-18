@@ -7,8 +7,8 @@ abstract class AbstractCoordinate
 
     function __construct(int $row, int $column)
     {
-        $this->row = $row;
-        $this->column = $column;
+        $this->row      = $row;
+        $this->column   = $column;
     }
 
     public function getRow(): int

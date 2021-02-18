@@ -4,7 +4,7 @@ class Player
 {
     protected static $BLACK = "X";
     protected static $WHITE = "O";
-
+    
     protected string $color;
 
     public function __construct(string $color)
@@ -67,7 +67,7 @@ class Player
 
     private function askCoordinate(string $row_question, string $column_question): Coordinate
     {
-        $row = (int) $this->askToUser($row_question) - 1;
+        $row    = (int) $this->askToUser($row_question) - 1;
         $column = $this->letterToNumber($this->askToUser($column_question)) - 1;
 
         return new Coordinate($row, $column);
@@ -84,7 +84,7 @@ class Player
         echo "\n";
 
         $handle = fopen("php://stdin", "r");
-        $line = fgets($handle);
+        $line   = fgets($handle);
 
         fclose($handle);
 
