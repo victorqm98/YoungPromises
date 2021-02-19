@@ -103,10 +103,10 @@ class Board
     public function getWinner(Turn $turn): ?Player
     {
         $tokens = 0;
-        $current_player = $turn->currentPlayer();
+        $enemy = $turn->notCurrentPlayer();
 
         foreach ($this->cells as $cell) {
-            if ($cell->hasToken() && $cell->getToken()->sameColor($current_player->getColor())) {
+            if ($cell->hasToken() && $cell->getToken()->sameColor($enemy->getColor())) {
                 $tokens++;
                 if ($tokens > 0) {
                     return null;
@@ -114,7 +114,7 @@ class Board
             }
         }
 
-        return $current_player;
+        return $turn->currentPlayer();
     }
 
     public function find(Coordinate $coordinate): Cell

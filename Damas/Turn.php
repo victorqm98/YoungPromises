@@ -15,7 +15,7 @@ class Turn
 
     public function change(): void
     {
-        $this->current = !$this->current;
+        $this->current = $this->notCurrent();
     }
 
     public function move(Board $board): void
@@ -38,5 +38,15 @@ class Turn
     public function currentPlayer(): Player
     {
         return $this->getPlayer($this->current);
+    }
+
+    public function notCurrentPlayer(): Player
+    {
+        return $this->getPlayer($this->notCurrent());
+    }
+
+    private function notCurrent(): int
+    {
+        return !$this->current;
     }
 }
