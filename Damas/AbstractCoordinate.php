@@ -38,14 +38,22 @@ abstract class AbstractCoordinate
 
     public function inDiagonal(self $coordinate): bool
     {
-        return abs($coordinate->getRow() - $this->getRow()) == abs($coordinate->getColumn() - $this->getColumn());
+        return $this->distanceInRows($coordinate) == $this->distanceInColumns($coordinate);
     }
 
     public function nextTo(self $coordinate): bool
     {
-        return
-            abs($this->getRow() - $coordinate->getRow()) == 1 ||
-            abs($this->getColumn() - $coordinate->getColumn()) == 1;
+        return $this->distanceInRows($coordinate) == 1 || $this->distanceInColumns($coordinate) == 1;
+    }
+
+    public function distanceInRows(self $coordinate): int
+    {
+        return abs($coordinate->getRow() - $this->getRow());
+    }
+
+    public function distanceInColumns(self $coordinate): int
+    {
+        return abs($coordinate->getColumn() - $this->getColumn());
     }
 
     public function isOver(self $coordinate): bool

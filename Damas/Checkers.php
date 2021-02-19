@@ -14,7 +14,7 @@ class Checkers
         $this->board    = new Board($this->turn);
     }
 
-    public function play()
+    public function play(): void
     {
         $this->board->show();
 

@@ -39,7 +39,7 @@ class Board
         return static::$DIMENSION;
     }
 
-    public function move(Coordinate $origin, Coordinate $target, Player $player)
+    public function move(Coordinate $origin, Coordinate $target, Player $player): void
     {
         if ($this->canKill($origin, $target, $player)) {
             $this->empty($origin->coordinateBetween($target, static::getDimension()));
@@ -147,7 +147,7 @@ class Board
         $origin_cell = $this->find($origin);
         $target_cell = $this->find($target);
 
-        if ($origin_cell->inDiagonal($target_cell) && abs($target->getRow() - $origin->getRow()) == 2) {
+        if ($origin_cell->inDiagonal($target_cell) && $target->distanceInRows($origin) == 2) {
             $enemyCoordinate = $origin->coordinateBetween($target, static::getDimension());
             return $this->find($enemyCoordinate)->hasColor($player->getOppositeColor());
         }
