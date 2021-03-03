@@ -7,15 +7,15 @@ include 'Coordinate.php';
 class Board
 {
     private array $cells;
-    private static $DIMENSION   = 8;
+    public const DIMENSION      = 8;
 
-    private static $LINE_BREAK  = "\n";
-    private static $SPACE       = " ";
+    private const LINE_BREAK    = "\n";
+    private const SPACE         = " ";
 
     function __construct(Turn $turn)
     {
         $this->cells = [];
-        $dimension = static::getDimension();
+        $dimension = static::dimension();
         for ($row = 0; $row < $dimension; $row++) {
             for ($column = 0; $column < $dimension; $column++) {
                 $coordinate     = new Coordinate($row, $column);
@@ -29,20 +29,20 @@ class Board
     public function putToken(int $dimension, Turn $turn, Coordinate $coordinate): void
     {
         if ($coordinate->hasInitialToken($dimension)) {
-            $player = $turn->getPlayer($coordinate->getInitialPlayerIndex(static::getDimension()));
+            $player = $turn->player($coordinate->initialPlayerIndex(static::dimension()));
             $this->fill($coordinate, new Token($player));
         }
     }
 
-    public static function getDimension(): int
+    public static function dimension(): int
     {
-        return static::$DIMENSION;
+        return self::DIMENSION;
     }
 
     public function move(Coordinate $origin, Coordinate $target, Player $player): void
     {
         if ($this->canKill($origin, $target, $player)) {
-            $this->empty($origin->coordinateBetween($target, static::getDimension()));
+            $this->empty($origin->coordinateBetween($target, static::dimension()));
         }
 
         $token = $this->empty($origin);
@@ -68,7 +68,7 @@ class Board
         $this->showLetters();
 
         $row = 1;
-        echo $row . static::$SPACE;
+        echo $row . self::SPACE;
 
         foreach ($this->cells as $key => $cell) {
             $cell->show();
@@ -78,35 +78,36 @@ class Board
 
                 if ($cell->differentRow($next_cell)) {
                     $row++;
-                    echo static::$LINE_BREAK . $row . static::$SPACE;
+                    echo self::LINE_BREAK . $row . self::SPACE;
                 }
             }
         }
 
-        echo static::$LINE_BREAK . static::$LINE_BREAK;
+        echo self::LINE_BREAK . self::LINE_BREAK;
     }
 
     private function showLetters(): void
     {
-        echo static::$SPACE . static::$SPACE;
+        echo self::SPACE . self::SPACE;
+
         $letter     = "A";
-        $dimension  = static::getDimension();
+        $dimension  = static::dimension();
 
         for ($i = 0; $i < $dimension; $i++) {
             echo $letter;
             $letter++;
         }
 
-        echo static::$LINE_BREAK;
+        echo self::LINE_BREAK;
     }
 
-    public function getWinner(Turn $turn): ?Player
+    public function winner(Turn $turn): ?Player
     {
         $tokens = 0;
         $enemy = $turn->notCurrentPlayer();
 
         foreach ($this->cells as $cell) {
-            if ($cell->hasToken() && $cell->getToken()->sameColor($enemy->getColor())) {
+            if ($cell->hasToken() && $cell->token()->sameColor($enemy->color())) {
                 $tokens++;
                 if ($tokens > 0) {
                     return null;
@@ -119,7 +120,7 @@ class Board
 
     public function find(Coordinate $coordinate): Cell
     {
-        assert($coordinate->isValid(static::getDimension()));
+        assert($coordinate->isValid(static::dimension()));
 
         foreach ($this->cells as $cell) {
             if ($cell->inCoordinate($coordinate)) {
@@ -135,7 +136,7 @@ class Board
         $origin_cell = $this->find($origin);
         $target_cell = $this->find($target);
 
-        if ($origin_cell->getToken()->isQueen() || $origin_cell->rightDirection($target_cell)) {
+        if ($origin_cell->token()->isQueen() || $origin_cell->rightDirection($target_cell)) {
             return $this->canKill($origin, $target, $player) || $origin->nextTo($target) && $origin_cell->inDiagonal($target_cell);
         }
 
@@ -148,8 +149,8 @@ class Board
         $target_cell = $this->find($target);
 
         if ($origin_cell->inDiagonal($target_cell) && $target->distanceInRows($origin) == 2) {
-            $enemyCoordinate = $origin->coordinateBetween($target, static::getDimension());
-            return $this->find($enemyCoordinate)->hasColor($player->getOppositeColor());
+            $enemyCoordinate = $origin->coordinateBetween($target, static::dimension());
+            return $this->find($enemyCoordinate)->hasColor($player->oppositeColor());
         }
 
         return false;
@@ -157,6 +158,6 @@ class Board
 
     private function canTransform(Token $token, Coordinate $coordinate): bool
     {
-        return !$token->isQueen() && ($coordinate->getRow() == 0 || $coordinate->getRow() == static::getDimension() - 1);
+        return !$token->isQueen() && ($coordinate->row() == 0 || $coordinate->row() == static::getDimension() - 1);
     }
 }

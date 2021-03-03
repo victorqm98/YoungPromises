@@ -2,7 +2,7 @@
 
 class Icon
 {
-    private static $OPTIONS = ["O", "X"];
+    private const OPTIONS = ["O", "X"];
     private int $player_index;
 
     public function __construct(int $index)
@@ -12,16 +12,16 @@ class Icon
 
     public function isBlack(): bool
     {
-        return $this->player_index == 1;
+        return $this->player_index === 1;
     }
 
-    public function getSymbol(): string
+    public function symbol(): string
     {
-        return static::$OPTIONS[$this->player_index];
+        return self::OPTIONS[$this->player_index];
     }
 
-    public function show(): void
-    {
-        echo $this->getSymbol();
-    }
+     public function show(): void
+     {
+         echo $this->symbol();
+     }
 }

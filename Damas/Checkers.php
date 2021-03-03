@@ -2,6 +2,7 @@
 
 include "Board.php";
 include "Turn.php";
+include "Utils.php";
 
 class Checkers
 {
@@ -14,19 +15,31 @@ class Checkers
         $this->board    = new Board($this->turn);
     }
 
-    public function play(): void
+    public static function play(): void
     {
-        $this->board->show();
+        $checkers = new self();
+        $checkers->board->show();
 
         do {
-            $this->turn->move($this->board);
-            $this->board->show();
-            $winner = $this->board->getWinner($this->turn);
-            $this->turn->change();
+            $checkers->claimTurn($checkers->turn->currentPlayer($checkers->board));
+            $checkers->turn->move($checkers->board);
+            $checkers->board->show();
+            $winner = $checkers->board->winner($checkers->turn);
+            $checkers->turn->change();
         } while (!$winner);
 
-        $winner->claimVictory();
+        $checkers->claimVictory($winner);
+    }
+
+    private function claimTurn(Player $player): void
+    {  
+        Utils::printLn("Turno del Jugador " . $player->color());
+    }
+
+    private function claimVictory(Player $player): void
+    {
+        Utils::printLn("\n¡Jugador " . $player->color() . ' gana!');
     }
 }
 
-(new Checkers())->play();
+Checkers::play();

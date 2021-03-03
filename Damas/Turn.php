@@ -5,12 +5,14 @@ include "Player.php";
 class Turn
 {
     private array $players;
-    private int $current;
+    private int $current = 0;
 
     function __construct()
     {
-        $this->current = 0;
-        $this->players = [new Player(Player::getWhiteColor()), new Player(Player::getBlackColor())];
+        $this->players = [
+            Player::initPlayerWhite(),
+            Player::initPlayerBlack()
+        ];
     }
 
     public function change(): void
@@ -21,28 +23,22 @@ class Turn
     public function move(Board $board): void
     {
         $current_player = $this->currentPlayer();
-        $this->claimTurn($current_player);
         $current_player->move($board);
     }
 
-    private function claimTurn(Player $player): void
-    {  
-        echo "Turno del Jugador " . $player->getColor() . "\n";
-    }
-
-    public function getPlayer(int $player): Player
+    public function player(int $player): Player
     {
         return $this->players[$player];
     }
 
     public function currentPlayer(): Player
     {
-        return $this->getPlayer($this->current);
+        return $this->player($this->current);
     }
 
     public function notCurrentPlayer(): Player
     {
-        return $this->getPlayer($this->notCurrent());
+        return $this->player($this->notCurrent());
     }
 
     private function notCurrent(): int

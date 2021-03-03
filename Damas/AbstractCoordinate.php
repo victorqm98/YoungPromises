@@ -11,24 +11,24 @@ abstract class AbstractCoordinate
         $this->column   = $column;
     }
 
-    public function getRow(): int
+    public function row(): int
     {
         return $this->row;
     }
 
-    public function getColumn(): int
+    public function column(): int
     {
         return $this->column;
     }
 
     public function sameRow(self $coordinate): bool
     {
-        return $this->getRow() == $coordinate->getRow();
+        return $this->row() == $coordinate->row();
     }
 
     public function sameColumn(self $coordinate): bool
     {
-        return $this->getColumn() == $coordinate->getColumn();
+        return $this->column() == $coordinate->column();
     }
 
     public function equals(self $coordinate): bool
@@ -48,17 +48,17 @@ abstract class AbstractCoordinate
 
     public function distanceInRows(self $coordinate): int
     {
-        return abs($coordinate->getRow() - $this->getRow());
+        return abs($coordinate->row() - $this->row());
     }
 
     public function distanceInColumns(self $coordinate): int
     {
-        return abs($coordinate->getColumn() - $this->getColumn());
+        return abs($coordinate->column() - $this->column());
     }
 
     public function isOver(self $coordinate): bool
     {
-        return $this->getRow() < $coordinate->getRow();
+        return $this->row() < $coordinate->row();
     }
 
     public function isUnder(self $coordinate): bool
@@ -68,12 +68,12 @@ abstract class AbstractCoordinate
 
     public function isLeft(self $coordinate): bool
     {
-        return $this->getColumn() < $coordinate->getColumn();
+        return $this->column() < $coordinate->column();
     }
 
-    public function getBetweenColumn(self $coordinate): int
+    public function betweenColumn(self $coordinate): int
     {
-        $column = $this->getColumn();
+        $column = $this->column();
 
         if ($this->isLeft($coordinate)) {
             return $column + 1;
@@ -82,9 +82,9 @@ abstract class AbstractCoordinate
         return $column - 1;
     }
 
-    public function getBetweenRow(self $coordinate): int
+    public function betweenRow(self $coordinate): int
     {
-        $row = $this->getRow();
+        $row = $this->row();
 
         if ($this->isUnder($coordinate)) {
             return $row - 1;

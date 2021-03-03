@@ -1,40 +1,41 @@
 <?php
+// include "Utils.php";
 
 class Player
 {
-    protected static $BLACK = "X";
-    protected static $WHITE = "O";
+    private const BLACK = "X";
+    private const WHITE = "O";
     
     protected string $color;
 
-    public function __construct(string $color)
+    private function __construct(string $color)
     {
         $this->color = $color;
     }
 
-    public function getColor(): string
+    public static function initPlayerBlack(): Player
+    {
+        return new self(self::BLACK);
+    }
+
+    public static function initPlayerWhite(): Player
+    {
+        return new self(self::WHITE);
+    }
+
+    public function color(): string
     {
         return $this->color;
     }
 
-    public static function getWhiteColor(): string
-    {
-        return static::$WHITE;
-    }
-
-    public static function getBlackColor(): string
-    {
-        return static::$BLACK;
-    }
-
     public function isBlack(): bool
     {
-        return $this->getColor() == static::getBlackColor();
+        return $this->color() == self::BLACK;
     }
 
-    public function getOppositeColor(): string
+    public function oppositeColor(): string
     {
-        return $this->isBlack() ? static::getWhiteColor() : static::getBlackColor();
+        return $this->isBlack() ? self::WHITE : self::BLACK;
     }
 
     public function move(Board $board): void
@@ -51,7 +52,7 @@ class Player
     {
         do {
             $origin = $this->askCoordinate("¿Fila origen?", "¿Columna origen?");
-        } while (!$origin->isValid(Board::getDimension()) || !$board->find($origin)->hasColor($this->getColor()));
+        } while (!$origin->isValid(Board::dimension()) || !$board->find($origin)->hasColor($this->color()));
 
         return $origin;
     }
@@ -60,7 +61,7 @@ class Player
     {
         do {
             $target = $this->askCoordinate("¿Fila destino?", "¿Columna destino?");
-        } while (!$target->isValid(Board::getDimension()) || !$board->find($target)->isEmpty());
+        } while (!$target->isValid(Board::dimension()) || !$board->find($target)->isEmpty());
 
         return $target;
     }
@@ -68,31 +69,13 @@ class Player
     private function askCoordinate(string $row_question, string $column_question): Coordinate
     {
         $row    = (int) $this->askToUser($row_question) - 1;
-        $column = $this->letterToNumber($this->askToUser($column_question)) - 1;
+        $column = Utils::letterToNumber($this->askToUser($column_question)) - 1;
 
         return new Coordinate($row, $column);
     }
 
-    private function letterToNumber(string $letter): int
-    {
-        return ord(strtolower($letter)) - 96;
-    }
-
     private function askToUser(string $question): string
     {
-        echo $question;
-        echo "\n";
-
-        $handle = fopen("php://stdin", "r");
-        $line   = fgets($handle);
-
-        fclose($handle);
-
-        return $line;
-    }
-
-    public function claimVictory(): void
-    {
-        echo "\n¡Jugador " . $this->getColor() . ' gana!';
+        return Utils::printLnAndInput($question);
     }
 }

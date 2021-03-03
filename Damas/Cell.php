@@ -4,19 +4,19 @@ class Cell
 {
     private Coordinate $coordinate;
     private ?Token $token;
-    private static $EMPTY = '-';
+    private const EMPTY = '-';
 
     function __construct(Coordinate $coordinate)
     {
         $this->coordinate = $coordinate;
     }
 
-    private function getCoordinate(): Coordinate
+    private function coordinate(): Coordinate
     {
         return $this->coordinate;
     }
 
-    public function getToken(): Token
+    public function token(): Token
     {
         return $this->token;
     }
@@ -28,7 +28,7 @@ class Cell
 
     public function empty(): Token
     {
-        $token          = $this->getToken();
+        $token          = $this->token();
         $this->token    = null;
         return $token;
     }
@@ -40,7 +40,7 @@ class Cell
 
     public function differentRow(self $cell): bool
     {
-        return !$this->coordinate->sameRow($cell->getCoordinate());
+        return !$this->coordinate->sameRow($cell->coordinate());
     }
 
     public function show(): void
@@ -48,7 +48,7 @@ class Cell
         if ($this->hasToken()) {
             $this->token->show();
         } else {
-            echo static::$EMPTY;
+            echo self::EMPTY;
         }
     }
 
@@ -59,7 +59,7 @@ class Cell
 
     public function hasColor(string $color): string
     {
-        return $this->hasToken() && $this->getToken()->sameColor($color);
+        return $this->hasToken() && $this->token()->sameColor($color);
     }
 
     public function isEmpty(): bool
@@ -69,15 +69,15 @@ class Cell
 
     public function inDiagonal(self $target_cell): bool
     {
-        return $this->coordinate->inDiagonal($target_cell->getCoordinate());
+        return $this->coordinate->inDiagonal($target_cell->coordinate());
     }
 
     public function rightDirection(self $target_cell): bool
     {
-        if ($this->getToken()->isBlack()) {
-            return $this->coordinate->isUnder($target_cell->getCoordinate());
+        if ($this->token()->isBlack()) {
+            return $this->coordinate->isUnder($target_cell->coordinate());
         }
 
-        return $this->coordinate->isOver($target_cell->getCoordinate());
+        return $this->coordinate->isOver($target_cell->coordinate());
     }
 }

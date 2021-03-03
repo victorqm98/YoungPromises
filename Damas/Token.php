@@ -11,19 +11,19 @@ class Token
         $this->is_queen = false;
     }
 
-    public function getPlayer(): Player
+    public function player(): Player
     {
         return $this->player;
     }
 
-    public function getColor(): string
+    public function color(): string
     {
-        return $this->getPlayer()->getColor();
+        return $this->player()->color();
     }
 
     public function isBlack(): bool
     {
-        return $this->getPlayer()->isBlack();
+        return $this->player()->isBlack();
     }
 
     public function isQueen(): bool
@@ -38,12 +38,12 @@ class Token
 
     public function sameColor(string $color): bool
     {
-        return $this->getColor() == $color;
+        return $this->color() == $color;
     }
 
     public function show(): void
     {
-        $icon = $this->getColor();
+        $icon = $this->color();
 
         if ($this->isQueen()) {
             echo $this->showQueen($icon);
