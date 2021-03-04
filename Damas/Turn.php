@@ -10,8 +10,8 @@ class Turn
     function __construct()
     {
         $this->players = [
-            Player::initPlayerWhite(),
-            Player::initPlayerBlack()
+            Player::createWhitePlayer(),
+            Player::createBlackPlayer()
         ];
     }
 

@@ -158,6 +158,6 @@ class Board
 
     private function canTransform(Token $token, Coordinate $coordinate): bool
     {
-        return !$token->isQueen() && ($coordinate->row() == 0 || $coordinate->row() == static::getDimension() - 1);
+        return !$token->isQueen() && ($coordinate->row() == 0 || $coordinate->row() == static::dimension() - 1);
     }
 }

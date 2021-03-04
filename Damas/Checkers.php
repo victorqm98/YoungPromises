@@ -21,7 +21,7 @@ class Checkers
         $checkers->board->show();
 
         do {
-            $checkers->claimTurn($checkers->turn->currentPlayer($checkers->board));
+            $checkers->claimTurn($checkers->turn->currentPlayer());
             $checkers->turn->move($checkers->board);
             $checkers->board->show();
             $winner = $checkers->board->winner($checkers->turn);

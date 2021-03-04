@@ -1,5 +1,4 @@
 <?php
-// include "Utils.php";
 
 class Player
 {
@@ -13,12 +12,12 @@ class Player
         $this->color = $color;
     }
 
-    public static function initPlayerBlack(): Player
+    public static function createBlackPlayer(): Player
     {
         return new self(self::BLACK);
     }
 
-    public static function initPlayerWhite(): Player
+    public static function createWhitePlayer(): Player
     {
         return new self(self::WHITE);
     }
