@@ -12,14 +12,12 @@ class Player
         $this->color = $color;
     }
 
-    public static function createBlackPlayer(): Player
+    public static function createPlayers(): array
     {
-        return new self(self::BLACK);
-    }
-
-    public static function createWhitePlayer(): Player
-    {
-        return new self(self::WHITE);
+        return [
+            new self(self::BLACK),
+            new self(self::WHITE)
+        ];
     }
 
     public function color(): string

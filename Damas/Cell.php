@@ -67,17 +67,17 @@ class Cell
         return !$this->hasToken();
     }
 
-    public function inDiagonal(self $target_cell): bool
+    public function inDiagonal(self $targetCell): bool
     {
-        return $this->coordinate->inDiagonal($target_cell->coordinate());
+        return $this->coordinate->inDiagonal($targetCell->coordinate());
     }
 
-    public function rightDirection(self $target_cell): bool
+    public function rightDirection(self $targetCell): bool
     {
         if ($this->token()->isBlack()) {
-            return $this->coordinate->isUnder($target_cell->coordinate());
+            return $this->coordinate->isUnder($targetCell->coordinate());
         }
 
-        return $this->coordinate->isOver($target_cell->coordinate());
+        return $this->coordinate->isOver($targetCell->coordinate());
     }
 }

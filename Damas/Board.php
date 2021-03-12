@@ -19,8 +19,7 @@ class Board
         for ($row = 0; $row < $dimension; $row++) {
             for ($column = 0; $column < $dimension; $column++) {
                 $coordinate     = new Coordinate($row, $column);
-                $new_cell       = new Cell($coordinate);
-                $this->cells[]  = $new_cell;
+                $this->cells[]  = new Cell($coordinate);
                 $this->putToken($dimension, $turn, $coordinate);
             }
         }
@@ -74,9 +73,9 @@ class Board
             $cell->show();
 
             if (isset($this->cells[$key + 1])) {
-                $next_cell = $this->cells[$key + 1];
+                $nextCell = $this->cells[$key + 1];
 
-                if ($cell->differentRow($next_cell)) {
+                if ($cell->differentRow($nextCell)) {
                     $row++;
                     echo self::LINE_BREAK . $row . self::SPACE;
                 }
@@ -133,11 +132,11 @@ class Board
 
     public function isLegalMove(Coordinate $origin, Coordinate $target, Player $player): bool
     {
-        $origin_cell = $this->find($origin);
-        $target_cell = $this->find($target);
+        $originCell = $this->find($origin);
+        $targetCell = $this->find($target);
 
-        if ($origin_cell->token()->isQueen() || $origin_cell->rightDirection($target_cell)) {
-            return $this->canKill($origin, $target, $player) || $origin->nextTo($target) && $origin_cell->inDiagonal($target_cell);
+        if ($originCell->token()->isQueen() || $originCell->rightDirection($targetCell)) {
+            return $this->canKill($origin, $target, $player) || $origin->nextTo($target) && $originCell->inDiagonal($targetCell);
         }
 
         return false;
@@ -145,10 +144,10 @@ class Board
 
     private function canKill(Coordinate $origin, Coordinate $target, Player $player): bool
     {
-        $origin_cell = $this->find($origin);
-        $target_cell = $this->find($target);
+        $originCell = $this->find($origin);
+        $targetCell = $this->find($target);
 
-        if ($origin_cell->inDiagonal($target_cell) && $target->distanceInRows($origin) == 2) {
+        if ($originCell->inDiagonal($targetCell) && $target->distanceInRows($origin) == 2) {
             $enemyCoordinate = $origin->coordinateBetween($target, static::dimension());
             return $this->find($enemyCoordinate)->hasColor($player->oppositeColor());
         }

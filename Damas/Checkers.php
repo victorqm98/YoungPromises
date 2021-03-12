@@ -15,20 +15,19 @@ class Checkers
         $this->board    = new Board($this->turn);
     }
 
-    public static function play(): void
+    public function play(): void
     {
-        $checkers = new self();
-        $checkers->board->show();
+        $this->board->show();
 
         do {
-            $checkers->claimTurn($checkers->turn->currentPlayer());
-            $checkers->turn->move($checkers->board);
-            $checkers->board->show();
-            $winner = $checkers->board->winner($checkers->turn);
-            $checkers->turn->change();
+            $this->claimTurn($this->turn->currentPlayer());
+            $this->turn->move($this->board);
+            $this->board->show();
+            $winner = $this->board->winner($this->turn);
+            $this->turn->change();
         } while (!$winner);
 
-        $checkers->claimVictory($winner);
+        $this->claimVictory($winner);
     }
 
     private function claimTurn(Player $player): void
@@ -42,4 +41,4 @@ class Checkers
     }
 }
 
-Checkers::play();
+(new Checkers())->play();
