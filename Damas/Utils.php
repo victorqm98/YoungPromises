@@ -7,14 +7,9 @@ class Utils
         return ord(strtolower($letter)) - 96;
     }
 
-    public static function printLn(string $text): void
-    {
-        echo $text."\n";
-    }
-
     public static function printLnAndInput(string $text): string
     {
-        self::printLn($text);
+        StandardOutputPrinter::printLn($text);
 
         $handle = fopen("php://stdin", "r");
         $line   = fgets($handle);

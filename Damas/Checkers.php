@@ -31,13 +31,13 @@ class Checkers
     }
 
     private function claimTurn(Player $player): void
-    {  
-        Utils::printLn("Turno del Jugador " . $player->color());
+    {
+        StandardOutputPrinter::printLn("Turno del Jugador " . $player->color());
     }
 
     private function claimVictory(Player $player): void
     {
-        Utils::printLn("\n¡Jugador " . $player->color() . ' gana!');
+        StandardOutputPrinter::printLn("\n¡Jugador " . $player->color() . ' gana!');
     }
 }
 
